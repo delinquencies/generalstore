@@ -468,8 +468,8 @@ body, .font-sans, .font-mono-display {
 
 .store-header-top {
   justify-content: space-between;
-  gap: 0.5rem 1.5rem;
-  padding-block: 0.7rem;
+  gap: 0.5rem;
+  padding-block: 0.55rem;
 }
 
 .store-header-actions {
@@ -478,6 +478,7 @@ body, .font-sans, .font-mono-display {
 }
 
 .store-brand {
+  min-width: 0;
   font-family: "Barlow Condensed", "Arial Narrow", sans-serif;
   font-size: clamp(1.25rem, 4.8vw, 2.6rem);
   font-weight: 900;
@@ -535,9 +536,9 @@ body, .font-sans, .font-mono-display {
   color: inherit;
 }
 
-.store-nav,
-.store-search.store-desktop-search,
-.store-saved {
+.store-nav {
+  width: min(100%, 29rem);
+  margin-inline-start: auto;
   display: none;
 }
 
@@ -556,7 +557,6 @@ body, .font-sans, .font-mono-display {
   display: grid;
 }
 
-.store-nav-links.store-nav-desktop { display: none; }
 
 .store-nav-links summary {
   display: flex;
@@ -632,81 +632,6 @@ body, .font-sans, .font-mono-display {
   overflow-y: auto;
 }
 
-@media (min-width: 72rem) {
-  .store-header-inner {
-    display: grid;
-    grid-template-columns: max-content minmax(0, 1fr) max-content;
-    align-items: center;
-    gap: 1.25rem;
-    padding-block: 0.7rem;
-  }
-
-  .store-header-top {
-    display: contents;
-  }
-
-  .store-brand {
-    grid-column: 1;
-    grid-row: 1;
-    font-size: clamp(1.75rem, 2.35vw, 2.3rem);
-    white-space: nowrap;
-  }
-
-  .store-header-actions {
-    grid-column: 3;
-    grid-row: 1;
-    gap: 0.5rem;
-  }
-
-  .store-search.store-desktop-search,
-  .store-saved,
-  .store-nav,
-  .store-header[data-menu-open] .store-nav {
-    display: flex;
-  }
-
-  .store-desktop-search {
-    width: clamp(9rem, 13vw, 13rem);
-  }
-
-  .store-desktop-search input[type="search"] {
-    font-size: 0.875rem;
-    padding-inline: 0.5rem;
-  }
-
-  .store-menu-toggle,
-  .store-mobile-only,
-  .store-nav-links.store-mobile-only {
-    display: none;
-  }
-
-  .store-nav {
-    grid-column: 2;
-    grid-row: 1;
-    padding: 0;
-    border: 0;
-  }
-
-  .store-nav-links {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 0 0.85rem;
-  }
-
-  .store-nav-links.store-nav-desktop { display: flex; }
-
-  .store-nav-links a {
-    min-height: 36px;
-    border: 0;
-    padding: 0;
-    white-space: nowrap;
-  }
-
-  .store-nav-links .store-mobile-only {
-    display: none;
-  }
-}
-
 .store-footer {
   border-top: 3px solid #1e1a17;
   background: #fffdf9;
@@ -721,9 +646,9 @@ body, .font-sans, .font-mono-display {
 .store-footer-grid {
   display: grid;
   grid-template-columns: minmax(0, 1fr) minmax(0, 0.95fr);
-  gap: clamp(0.75rem, 4vw, 3rem);
+  gap: clamp(0.5rem, 2vw, 1.25rem);
   align-items: center;
-  padding: clamp(1rem, 4vw, 2.5rem);
+  padding: clamp(0.65rem, 2vw, 1.25rem);
   background: #ffdf00;
 }
 
@@ -737,25 +662,25 @@ body, .font-sans, .font-mono-display {
 }
 
 .store-footer-brand a strong {
-  font: 900 clamp(1.6rem, 8vw, 7rem)/0.82 "Barlow Condensed", "Arial Narrow", sans-serif;
+  font: 900 clamp(1.4rem, 4vw, 3rem)/0.82 "Barlow Condensed", "Arial Narrow", sans-serif;
   letter-spacing: -0.045em;
 }
 
 .store-footer-brand a span:last-child {
   justify-self: end;
   margin-top: 0.28em;
-  font: 400 clamp(1.1rem, 4.5vw, 3.8rem)/0.95 "Alfa Slab One", Georgia, serif;
+  font: 400 clamp(1rem, 2.4vw, 1.8rem)/0.95 "Alfa Slab One", Georgia, serif;
   letter-spacing: -0.035em;
 }
 
 .store-footer-brand p {
-  margin-top: clamp(0.65rem, 3vw, 2.25rem);
+  margin-top: 0.4rem;
   max-width: 30ch;
 }
 
 #footer-platforms {
   width: 100%;
-  max-width: 22rem;
+  max-width: 11rem;
   justify-self: end;
 }
 
@@ -782,7 +707,7 @@ body, .font-sans, .font-mono-display {
 
 @media (min-width: 48rem) {
   .store-footer-grid {
-    grid-template-columns: minmax(0, 1fr) minmax(0, 22rem);
+    grid-template-columns: minmax(0, 1fr) minmax(0, 11rem);
   }
 }
 
@@ -857,7 +782,7 @@ body, .font-sans, .font-mono-display {
 #just-catalogued .featured-heading h2 {
   display: grid;
   align-content: center;
-  padding: clamp(0.65rem, 3vw, 2.25rem);
+  padding: 0.4rem;
   background: #1d4ed8;
   color: #fffdf9;
   font-size: clamp(1.3rem, 5vw, 4.5rem);
@@ -910,8 +835,11 @@ body, .font-sans, .font-mono-display {
 .page-poster {
   max-width: 78rem;
   margin-inline: auto;
-  padding: clamp(1.25rem, 4vw, 3.5rem) clamp(1rem, 3vw, 2.5rem) clamp(2.75rem, 7vw, 5.5rem);
+  padding: clamp(0.85rem, 4vw, 3.5rem) clamp(0.75rem, 3vw, 2.5rem) clamp(1.75rem, 5vw, 3.5rem);
+  overflow-wrap: anywhere;
 }
+
+.page-poster > *, .page-poster article > *, .product-poster-copy { min-width: 0; }
 
 .page-poster > * + * {
   margin-top: 1.35rem;
@@ -924,16 +852,26 @@ body, .font-sans, .font-mono-display {
   background: #ffdf00;
 }
 
-.page-poster-title:has(img) {
-  grid-template-columns: minmax(0, 1fr) minmax(5rem, 26%);
+.page-poster-title:has(.page-poster-art) {
+  grid-template-columns: minmax(0, 1fr) minmax(4rem, 27%);
 }
 
-.page-poster-title img {
+.page-poster-art {
+  display: grid;
+  grid-template: minmax(0, 1fr) / minmax(0, 1fr);
+  place-items: center;
+  min-width: 0;
+  height: clamp(5.5rem, 19vw, 10rem);
+  padding: 0.3rem;
+  border-left: 3px solid #1e1a17;
+  background: #fffdf9;
+}
+
+.page-poster-art img {
   width: 100%;
   height: 100%;
-  max-height: 10rem;
-  object-fit: cover;
-  border-left: 3px solid #1e1a17;
+  min-height: 0;
+  object-fit: contain;
 }
 
 .page-poster-title h1 {
@@ -1027,7 +965,7 @@ body, .font-sans, .font-mono-display {
   max-height: min(52svh, 27rem);
   object-fit: contain;
 }
-.preview-notice { padding: 0.5rem 1rem; text-align: center; font-size: 0.875rem; }
+.preview-notice { flex-basis: 100%; font-weight: 400; }
 [data-local-preview] .preview-notice,
 [data-local-preview] .static-signup-note,
 html:not([data-local-preview]) .local-signup-note { display: none; }
@@ -1085,6 +1023,8 @@ html:not([data-local-preview]) .local-signup-note { display: none; }
 }
 
 .poster-controls input, .poster-controls select {
+  min-width: 0;
+  max-width: 100%;
   font-size: 1rem;
 }
 
@@ -1099,7 +1039,8 @@ html:not([data-local-preview]) .local-signup-note { display: none; }
 .policy-copy .policy-draft { font-weight: 700; }
 
 .poster-message {
-  padding: clamp(1rem, 3vw, 2rem);
+  padding: clamp(0.75rem, 3vw, 2rem);
+  overflow-wrap: anywhere;
   border: 2px solid #1e1a17;
   background: #fffdf9;
 }
@@ -1205,6 +1146,8 @@ body:has(.bag-drawer[open]) {
 
 .bag-drawer-bottom {
   flex: none;
+  max-height: 55%;
+  overflow-y: auto;
   border-top: 2px solid #1e1a17;
   padding: 1rem;
 }
@@ -1268,8 +1211,11 @@ body:has(.page-poster[data-page="about"]) .store-footer-bottom ul { justify-cont
   background-position: var(--tile-x) var(--tile-y);
 }
 .store-footer .about-platforms {
-  max-width: 22rem;
+  max-width: 11rem;
   margin: 0;
+  gap: 0.25rem;
+  padding: 0.3rem;
+  box-shadow: none;
 }
 @media (hover: hover) and (prefers-reduced-motion: no-preference) {
   .about-platform-icon { transition: transform 140ms ease-out, box-shadow 140ms ease-out; }
@@ -1296,7 +1242,8 @@ body:has(.page-poster[data-page="about"]) .store-footer-bottom ul { justify-cont
 }
 .checkout-mast { background: #ffdf00; }
 .checkout-mast h1 {
-  font: 900 clamp(3rem, 13vw, 9rem)/0.84 "Barlow Condensed", sans-serif;
+  font: 900 clamp(2.3rem, 10vw, 9rem)/0.94 "Barlow Condensed", sans-serif;
+  overflow-wrap: anywhere;
   text-transform: uppercase;
 }
 .checkout-mast h1 span {
@@ -1362,30 +1309,23 @@ body:has(.page-poster[data-page="about"]) .store-footer-bottom ul { justify-cont
 <script src="./shop.js" defer></script>
 </head>
 <body class="flex min-h-full flex-col bg-cream font-sans text-ink antialiased">
-  <p class="preview-notice">Storefront preview. Products shown are samples, and orders are unavailable.</p>
 <a href="#main" class="sr-only focus:not-sr-only">Skip to content</a>
     <header class="store-header">
   <div class="store-header-inner">
     <div class="store-header-top">
       <a class="store-brand" href="./index.html" aria-label="Oddly Enough home">ODDLY ENOUGH<span class="store-brand-dots" aria-hidden="true"><span>.</span><span>.</span><span>.</span></span></a>
       <div class="store-header-actions">
-        <form class="store-search store-desktop-search" action="./index.html" role="search">
-          <input type="hidden" name="view" value="shop">
-          <input name="q" type="search" aria-label="Search products" placeholder="Search the shop" maxlength="100">
-          <button type="submit" aria-label="Submit search"><span aria-hidden="true" class="material-symbols-outlined">search</span></button>
-        </form>
-        <a class="store-header-button store-saved" href="./index.html?view=favorites">Saved</a>
-        <a class="store-header-button store-bag" href="./index.html?view=cart">Bag <span data-bag-count>0</span></a>
+        <a class="store-header-button" href="./index.html?view=contact" data-store-view="contact">Contact Us</a>
         <button class="store-header-button store-menu-toggle" type="button" aria-expanded="false" aria-controls="store-navigation" aria-label="Open menu"><span class="material-symbols-outlined" aria-hidden="true">menu</span></button>
       </div>
     </div>
     <nav class="store-nav" id="store-navigation" aria-label="Store navigation">
-      <form class="store-search store-mobile-only" action="./index.html" role="search">
+      <form class="store-search" action="./index.html" role="search">
         <input type="hidden" name="view" value="shop">
         <input name="q" type="search" aria-label="Search products" placeholder="Search the shop" maxlength="100">
         <button type="submit" aria-label="Submit search"><span aria-hidden="true" class="material-symbols-outlined">search</span></button>
       </form>
-      <div class="store-nav-links store-mobile-only">
+      <div class="store-nav-links">
         <details>
           <summary>Categories <span class="material-symbols-outlined store-nav-expand" aria-hidden="true">expand_more</span></summary>
           <div class="store-nav-submenu">
@@ -1397,22 +1337,15 @@ body:has(.page-poster[data-page="about"]) .store-footer-bottom ul { justify-cont
           </div>
         </details>
         <a href="./index.html?view=favorites" data-store-view="favorites">Saved Items</a>
+        <a class="store-bag" href="./index.html?view=cart">Bag (<span data-bag-count>0</span>)</a>
         <a href="./index.html?view=about" data-store-view="about">About Us</a>
         <details>
           <summary>Help <span class="material-symbols-outlined store-nav-expand" aria-hidden="true">expand_more</span></summary>
           <div class="store-nav-submenu">
-            <a href="./index.html?view=contact" data-store-view="contact">Contact</a>
             <a href="./index.html?view=shipping" data-store-view="shipping">Shipping</a>
             <a href="./index.html?view=returns" data-store-view="returns">Returns &amp; Exchanges</a>
           </div>
         </details>
-      </div>
-      <div class="store-nav-desktop store-nav-links">
-        <a href="./index.html?view=shop" data-shop-link="">Shop All</a>
-        <a href="./index.html?view=shop&amp;department=objects" data-shop-link="objects">Objects &amp; Curios</a>
-        <a href="./index.html?view=shop&amp;department=home" data-shop-link="home">Home &amp; Living</a>
-        <a href="./index.html?view=shop&amp;department=essentials" data-shop-link="essentials">Everyday Essentials</a>
-        <a href="./index.html?view=shop&amp;department=vintage" data-shop-link="vintage">Vintage &amp; Found</a>
       </div>
     </nav>
   </div>
@@ -1666,6 +1599,7 @@ body:has(.page-poster[data-page="about"]) .store-footer-bottom ul { justify-cont
   </div>
   <div class="store-footer-bottom">
     <p>&copy; Oddly Enough</p>
+  <p class="preview-notice">Storefront preview. Products shown are samples, and orders are unavailable.</p>
     <ul aria-label="Store information and policies">
       <li><a href="./index.html?view=about">About Us</a></li>
       <li><a href="./index.html?view=contact">Contact</a></li>

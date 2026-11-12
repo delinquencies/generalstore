@@ -63,7 +63,6 @@ if (menuToggle) {
       menuToggle.focus();
     }
   });
-  window.matchMedia("(min-width: 72rem)").addEventListener("change", closeMenu);
   for (const link of storeHeader.querySelectorAll("[data-store-view]")) {
     if (link.dataset.storeView === view) link.setAttribute("aria-current", "page");
   }
@@ -128,7 +127,7 @@ function card(item, featured = false) {
 function section(title, body, department = "") {
   document.title = title + " | Oddly Enough";
   const art = Object.hasOwn(departments, department) && document.querySelector(`[data-department-poster="${department}"] img`);
-  shop.innerHTML = `<section class="page-poster" data-page="${encode(view ?? "")}"><header class="page-poster-title"><h1>${encode(title)}</h1>${art ? `<img src="${encode(art.getAttribute("src"))}" alt="">` : ""}</header>${body}</section>`;
+  shop.innerHTML = `<section class="page-poster" data-page="${encode(view ?? "")}"><header class="page-poster-title"><h1>${encode(title)}</h1>${art ? `<div class="page-poster-art"><img src="${encode(art.getAttribute("src"))}" alt=""></div>` : ""}</header>${body}</section>`;
 }
 
 const searchText = (value) => value.toLowerCase().normalize("NFD").replace(/\p{M}/gu, "").replace(/[^\p{L}\p{N}]+/gu, " ").trim();
