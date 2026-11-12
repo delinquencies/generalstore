@@ -1,6 +1,7 @@
 "use strict";
 
 const catalog = window.generalEditCatalog;
+const localPreview = document.documentElement?.hasAttribute("data-local-preview") === true;
 const query = new URLSearchParams(window.location.search);
 const bagDrawer = document.querySelector("#bag-drawer");
 const bagTrigger = document.querySelector(".store-bag");
@@ -173,7 +174,7 @@ function productPage() {
   section(item.title, `<article class="grid items-start gap-6 md:grid-cols-2">
     <div class="space-y-4">
     <div class="product-detail-photo">
-      <img src="${encode(item.photo.src)}" alt="${encode(item.photo.alt)}" class="aspect-[4/5] w-full border-2 border-ink bg-cream-muted object-cover">
+      <img src="${encode(item.photo.src)}" alt="${encode(item.photo.alt)}">
       ${photoTags(item)}
     </div>
     ${extraPhotos.length ? `<div class="grid grid-cols-2 gap-3">${extraPhotos.map((photo) => `<img src="${encode(photo.src)}" alt="${encode(photo.alt)}" class="w-full border-2 border-ink bg-cream-muted" loading="lazy">`).join("")}</div>` : ""}
@@ -203,7 +204,7 @@ function bagPage() {
       <div><dt>Estimated total</dt><dd>${dollars(subtotal + estimatedTax)}</dd></div>
     </dl>
     <p class="mt-3 text-xs">Preview total before shipping.</p>
-    <div class="bag-shipping">
+    ${localPreview ? `<div class="bag-shipping">
       ${canEstimateShipping() ? `
       <form data-shipping-estimate>
         <label for="shipping-zip">US ZIP code</label>
@@ -214,7 +215,7 @@ function bagPage() {
         <div class="bag-shipping-result" role="status" aria-live="polite"></div>
       </form>` : "<p>Shipping estimates are available for one item at a time.</p>"}
     </div>
-    ${view === "checkout" ? "" : `<a class="${primary} checkout-link" href="./index.html?view=checkout">Checkout <span aria-hidden="true">&rarr;</span></a>`}
+    ${view === "checkout" ? "" : `<a class="${primary} checkout-link" href="./index.html?view=checkout">Checkout <span aria-hidden="true">&rarr;</span></a>`}` : "<p>Ordering is unavailable in this preview.</p>"}
   </div>` : "";
   if (hasDrawer) {
     bagDrawer.querySelector(".bag-drawer-items").innerHTML = items;
@@ -242,6 +243,10 @@ function checkoutSummary() {
 }
 
 function checkoutPage() {
+  if (!localPreview) {
+    section("Checkout", '<p class="poster-message">Ordering is unavailable in this preview. <a class="underline" href="./index.html?view=shop">Browse the shop</a>.</p>');
+    return;
+  }
   document.title = "Checkout | Oddly Enough";
   shop.innerHTML = `<section class="checkout-poster">
     <header class="checkout-mast"><h1><span>Your bag.</span> Checkout</h1></header>
@@ -273,7 +278,7 @@ function checkoutPage() {
 }
 
 function refreshCheckout() {
-  if (view !== "checkout") return;
+  if (view !== "checkout" || !localPreview) return;
   const summary = document.querySelector("#checkout-summary");
   if (!cart.size || !summary) {
     checkoutPage();
@@ -395,7 +400,8 @@ if (footerPlatforms && view !== "about") {
   footerPlatforms.append(document.querySelector("#platform-art").content.cloneNode(true));
 }
 
-const signup = document.querySelector("#next-find-signup");
+const signup = localPreview ? document.querySelector("#next-find-signup") : null;
+if (signup) signup.hidden = false;
 signup?.addEventListener("submit", async (event) => {
   event.preventDefault();
   const button = signup.querySelector("button");

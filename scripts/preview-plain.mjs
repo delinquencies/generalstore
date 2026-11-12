@@ -24,9 +24,12 @@ export const previewServer = createServer(async (request, response) => {
       return;
     }
     const contents = await readFile(new URL("../public/plain/" + filename, import.meta.url));
-    const body = filename === "products.js"
-      ? contents.toString("utf8") + "\nwindow.generalEditCatalog.unshift(..." + JSON.stringify(await publishedProducts()) + ");\n"
-      : contents;
+    let body = contents;
+    if (filename === "products.js") {
+      body = contents.toString("utf8") + "\nwindow.generalEditCatalog.unshift(..." + JSON.stringify(await publishedProducts()) + ");\n";
+    } else if (filename === "index.html") {
+      body = contents.toString("utf8").replace("<html ", "<html data-local-preview ");
+    }
     response.writeHead(200, { "Content-Type": type + "; charset=utf-8", "Cache-Control": "no-store", "X-Content-Type-Options": "nosniff" }).end(body);
   } catch {
     response.writeHead(500).end("Preview file unavailable");

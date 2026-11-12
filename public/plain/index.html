@@ -1019,6 +1019,18 @@ body, .font-sans, .font-mono-display {
 }
 .product-spotlight .product-poster-copy { background: #fff7cb; }
 .product-poster-photo, .product-detail-photo { position: relative; }
+.product-detail-photo { border: 2px solid #1e1a17; background: #f3ece0; }
+.product-detail-photo img {
+  display: block;
+  width: 100%;
+  height: auto;
+  max-height: min(52svh, 27rem);
+  object-fit: contain;
+}
+.preview-notice { padding: 0.5rem 1rem; text-align: center; font-size: 0.875rem; }
+[data-local-preview] .preview-notice,
+[data-local-preview] .static-signup-note,
+html:not([data-local-preview]) .local-signup-note { display: none; }
 .product-photo-tag {
   position: absolute;
   top: 0.75rem;
@@ -1350,6 +1362,7 @@ body:has(.page-poster[data-page="about"]) .store-footer-bottom ul { justify-cont
 <script src="./shop.js" defer></script>
 </head>
 <body class="flex min-h-full flex-col bg-cream font-sans text-ink antialiased">
+  <p class="preview-notice">Storefront preview. Products shown are samples, and orders are unavailable.</p>
 <a href="#main" class="sr-only focus:not-sr-only">Skip to content</a>
     <header class="store-header">
   <div class="store-header-inner">
@@ -1549,8 +1562,9 @@ body:has(.page-poster[data-page="about"]) .store-footer-bottom ul { justify-cont
       <div class="next-find">
         <div class="next-find-copy">
           <h2 id="next-find-title">The Next Find</h2>
-          <p>Sign up and we’ll email you when we score a deal and can pass the savings on to you.</p>
-          <form id="next-find-signup">
+          <p class="local-signup-note">Sign up and we’ll email you when we score a deal and can pass the savings on to you.</p>
+          <p class="static-signup-note">Email signups will open when the store launches.</p>
+          <form id="next-find-signup" hidden>
             <label class="sr-only" for="next-find-email">Email address</label>
             <div class="next-find-fields">
               <input id="next-find-email" name="email" type="email" autocomplete="email" maxlength="254" placeholder="Email address" required>
