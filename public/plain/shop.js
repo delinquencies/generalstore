@@ -149,8 +149,8 @@ function catalogPage() {
   section(departments[department] ?? "Shop All", `<form action="./index.html" class="poster-controls flex flex-wrap items-end gap-3">
     <input type="hidden" name="view" value="shop">
     <label class="grid min-w-0 gap-1 text-sm">Search<input name="q" type="search" maxlength="100" class="${field} w-full" value="${encode(term)}"></label>
-    <label class="grid min-w-0 gap-1 text-sm">Department<select name="department" class="${field}"><option value="">All departments</option>${Object.entries(departments).map(([key, title]) => `<option value="${key}" ${key === department ? "selected" : ""}>${encode(title)}</option>`).join("")}</select></label>
-    <label class="grid gap-1 text-sm">Condition<select name="condition" class="${field}"><option value="">Any condition</option>${["New", "Vintage"].map((label) => `<option ${label === condition ? "selected" : ""}>${label}</option>`).join("")}</select></label>
+    <label class="grid min-w-0 gap-1 text-sm">Department<select name="department" class="${field} store-select"><option value="">All departments</option>${Object.entries(departments).map(([key, title]) => `<option value="${key}" ${key === department ? "selected" : ""}>${encode(title)}</option>`).join("")}</select></label>
+    <label class="grid gap-1 text-sm">Condition<select name="condition" class="${field} store-select"><option value="">Any condition</option>${["New", "Vintage"].map((label) => `<option ${label === condition ? "selected" : ""}>${label}</option>`).join("")}</select></label>
     <button class="${primary}">Apply</button>
   </form><p class="text-sm">${items.length} ${items.length === 1 ? "object" : "objects"}</p>${items.length ? `<div class="${grid}">${items.map(card).join("")}</div>` : '<p class="poster-message">No products match your search. <a class="underline" href="./index.html?view=shop">Clear search and filters</a>.</p>'}`, department || "objects");
 }
@@ -191,7 +191,7 @@ function bagPage() {
     const lineTotal = effectivePrice(item) * quantity;
     subtotal += lineTotal;
     return `<li class="flex flex-wrap items-center justify-between gap-3 p-4"><a class="font-sans font-semibold text-xl underline" href="${productUrl(item)}">${encode(item.title)}</a>
-      <div class="flex flex-wrap items-center gap-3"><label>Quantity <select aria-label="Quantity for ${encode(item.title)}" class="${field}" data-quantity="${slug}">${Array.from({ length: item.stock }, (_, index) => `<option ${index + 1 === quantity ? "selected" : ""}>${index + 1}</option>`).join("")}</select></label>
+      <div class="flex flex-wrap items-center gap-3"><label>Quantity <select aria-label="Quantity for ${encode(item.title)}" class="${field} store-select" data-quantity="${slug}">${Array.from({ length: item.stock }, (_, index) => `<option ${index + 1 === quantity ? "selected" : ""}>${index + 1}</option>`).join("")}</select></label>
       <span>${dollars(lineTotal)}</span><button type="button" class="underline" data-remove="${slug}">Remove</button></div></li>`;
   }).join("");
   const items = rows ? `<ul class="poster-bag-lines">${rows}</ul>` : '<p class="poster-message">Your bag is empty. <a class="underline" href="./index.html?view=shop">Browse the shop</a>.</p>';
@@ -263,7 +263,10 @@ function checkoutPage() {
       <aside class="checkout-panel checkout-order">
         <h2>In the bag</h2>
         <div id="checkout-summary">${checkoutSummary()}</div>
-        <p class="checkout-payment">Online payment is coming soon. No order will be placed here yet.</p>
+        <div class="checkout-payment">
+          ${document.querySelector("#checkout-payment-art")?.innerHTML ?? ""}
+          <p>Online payment is coming soon. No order will be placed here yet.</p>
+        </div>
       </aside>
     </div>` : `<div class="checkout-panel"><p>Your bag is empty.</p><a class="${primary}" href="./index.html?view=shop">Browse the shop</a></div>`}
   </section>`;

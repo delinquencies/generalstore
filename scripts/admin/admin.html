@@ -17,7 +17,7 @@ section { padding: clamp(1rem, 3vw, 2rem); }
 header a, section a { text-decoration: underline; }
 form { display: grid; gap: 1rem; margin-top: 1rem; }
 label { display: grid; gap: 0.35rem; min-width: 0; }
-input, select, textarea { width: 100%; min-width: 0; border: 1px solid #1e1a17; background: white; padding: 0.55rem; font: inherit; }
+input, select, textarea { width: 100%; min-width: 0; border: 1px solid #1e1a17; background-color: white; padding: 0.55rem; font: inherit; }
 textarea { min-height: 7rem; }
 form .fields { display: grid; gap: 0.85rem; grid-template-columns: repeat(auto-fit, minmax(min(100%, 12rem), 1fr)); }
 fieldset { min-width: 0; border: 1px solid #1e1a17; padding: 0.85rem; }
@@ -49,13 +49,13 @@ button:disabled { opacity: 0.55; cursor: wait; }
         <small id="keyword-help">Separate alternate names and spellings with commas, such as rotary phone, dial telephone, landline.</small>
       </label>
       <div class="fields">
-        <label>Department<select name="department" required>
+        <label>Department<select class="store-select" name="department" required>
           <option value="objects">Objects &amp; Curiosities</option>
           <option value="home">Home &amp; Living</option>
           <option value="essentials">Everyday Essentials</option>
           <option value="vintage">Vintage &amp; Found</option>
         </select></label>
-        <label>Condition<select name="condition"><option>New</option><option>Vintage</option></select></label>
+        <label>Condition<select class="store-select" name="condition"><option>New</option><option>Vintage</option></select></label>
         <label>Price (USD)<input name="price" type="number" min="0.01" max="1000000" step="0.01" required></label>
         <label>Sale price (USD)<input name="salePrice" type="number" min="0.01" max="999999.99" step="0.01" placeholder="Optional"></label>
         <label>Quantity<input name="stock" type="number" min="0" max="9999" step="1" value="1" required></label>

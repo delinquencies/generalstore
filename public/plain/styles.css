@@ -6,6 +6,12 @@
   font-size: 0.875rem;
 }
 
+select.store-select {
+  max-width: 100%;
+  padding-inline-end: 2.5rem;
+  background-position: right 0.65rem center;
+}
+
 .bag-shipping-fields {
   display: flex;
   flex-wrap: wrap;
