@@ -2,6 +2,8 @@
 
 Oddly Enough is a general-store storefront preview for vintage finds and everyday goods. The current poster-style storefront lives in `public/plain/`. The owner portal runs on the local preview server.
 
+See [TODO.md](TODO.md) for the preview deployment and launch checklist.
+
 ## Run the storefront locally
 
 Install Node.js 22.18 or later, then run these commands from a terminal.
