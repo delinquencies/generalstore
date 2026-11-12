@@ -362,13 +362,20 @@ function favoritesPage() {
 }
 
 const info = {
-  contact: ["Contact", "Contact details will be published when the store opens."],
-  shipping: ["Shipping", "Shipping destinations and rates are pending."],
-  returns: ["Returns & Exchanges", "The store’s returns policy is pending."],
-  privacy: ["Privacy Policy", "This preview stores your bag and favorites in your browser."],
-  terms: ["Terms of Sale", "This preview uses sample inventory and accepts no orders."],
-  accessibility: ["Accessibility", "Accessibility testing is in progress."],
+  contact: "Contact",
+  shipping: "Shipping",
+  returns: "Returns & Exchanges",
+  privacy: "Privacy Policy",
+  terms: "Terms of Sale",
+  accessibility: "Accessibility",
 };
+
+function infoPage() {
+  const policy = document.querySelector("#policy-" + view);
+  section(info[view], policy
+    ? `<div class="poster-message policy-copy"><p class="policy-draft">Draft for review</p>${policy.innerHTML}</div>`
+    : '<p class="poster-message">Accessibility testing is in progress.</p>');
+}
 
 function aboutPage() {
   section("About Us", `<div class="about-story"><div class="poster-message space-y-3">
@@ -456,7 +463,7 @@ if (view) {
   else if (view === "checkout") checkoutPage();
   else if (view === "favorites") favoritesPage();
   else if (view === "about") aboutPage();
-  else if (Object.hasOwn(info, view)) section(info[view][0], `<p class="poster-message">${encode(info[view][1])}</p>`);
+  else if (Object.hasOwn(info, view)) infoPage();
   else section("Page unavailable", '<a class="underline" href="./index.html">Back home</a>');
 } else {
   freshPage(0);
