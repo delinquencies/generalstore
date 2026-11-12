@@ -21,7 +21,7 @@ Sign in as `owner` with the password printed in the terminal. The generated pass
 1. Add a product with a name, description, department, condition, price, and stock.
 2. Add any specifications, search keywords, and packed shipping measurements you have. Item dimensions appear on the product page. Packed measurements feed shipping estimates.
 3. Save a draft or upload at least one photo and publish it. The first photo is the cover.
-4. Use **Your Products  Edit** to update a listing. **Featured spotlight**, **One of one (1/1)**, and **Sale price** control the storefront treatments. Selecting new photos replaces the existing set.
+4. Use **Your Products → Edit** to update a listing. **Featured spotlight**, **One of one (1/1)**, and **Sale price** control the storefront treatments. Selecting new photos replaces the existing set.
 5. Refresh the storefront after publishing or editing a listing.
 
 Products and photos live in `.oddly-enough/catalog.json`. Test newsletter signups live in `.oddly-enough/newsletter/`. Git ignores this local data and local environment files. Back up the catalog file separately if you want to retain your listings.

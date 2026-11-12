@@ -1,0 +1,97 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Add Product | Oddly Enough</title>
+<link rel="stylesheet" href="/styles.css">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@900&amp;family=Rubik:wght@400..800&amp;display=swap">
+<script src="/admin.js" defer></script>
+<style>
+body { margin: 0; background: #fffdf9; color: #1e1a17; font-family: Rubik, system-ui, sans-serif; }
+main { max-width: 65rem; margin: auto; padding: 1rem; }
+header, section { border: 3px solid #1e1a17; margin-bottom: 1rem; }
+header { padding: 1rem; background: #ffdf00; }
+h1, h2 { font: 900 clamp(2rem, 6vw, 3.5rem)/1 "Barlow Condensed", sans-serif; text-transform: uppercase; }
+section { padding: clamp(1rem, 3vw, 2rem); }
+header a, section a { text-decoration: underline; }
+form { display: grid; gap: 1rem; margin-top: 1rem; }
+label { display: grid; gap: 0.35rem; min-width: 0; }
+input, select, textarea { width: 100%; min-width: 0; border: 1px solid #1e1a17; background: white; padding: 0.55rem; font: inherit; }
+textarea { min-height: 7rem; }
+form .fields { display: grid; gap: 0.85rem; grid-template-columns: repeat(auto-fit, minmax(min(100%, 12rem), 1fr)); }
+fieldset { min-width: 0; border: 1px solid #1e1a17; padding: 0.85rem; }
+legend { padding-inline: 0.35rem; font-weight: 700; }
+fieldset p { margin-bottom: 0.75rem; }
+.actions { display: flex; flex-wrap: wrap; gap: 0.55rem; }
+button { border: 2px solid #1e1a17; min-height: 44px; padding: 0.55rem 0.8rem; font: 700 0.9rem Rubik, sans-serif; background: white; cursor: pointer; }
+button[value=published] { background: #1d4ed8; color: white; }
+button:disabled { opacity: 0.55; cursor: wait; }
+.spotlight-setting { display: flex; align-items: center; gap: 0.5rem; }
+.spotlight-setting input { width: auto; }
+#products { display: grid; gap: 0.65rem; margin-top: 1rem; }
+#products li { border-top: 1px solid #1e1a17; padding-block: 0.65rem; display: flex; flex-wrap: wrap; gap: 0.7rem; align-items: center; justify-content: space-between; }
+#message:empty { display: none; }
+#message[data-error] { color: #9b2819; }
+</style>
+</head>
+<body>
+<main>
+  <header><a href="/index.html">Oddly Enough storefront</a><h1>Add Product</h1></header>
+  <section aria-label="Product details">
+    <form id="product-form">
+      <label>Product name<input name="title" required maxlength="100"></label>
+      <label>Description<textarea name="description" required maxlength="2000"></textarea></label>
+      <label class="spotlight-setting"><input name="spotlight" type="checkbox"> Give this product a featured spotlight</label>
+      <label class="spotlight-setting"><input name="oneOfOne" type="checkbox"> One of one (1/1)</label>
+      <label>Search keywords (optional)
+        <input name="searchKeywords" maxlength="300" aria-describedby="keyword-help">
+        <small id="keyword-help">Separate alternate names and spellings with commas, such as rotary phone, dial telephone, landline.</small>
+      </label>
+      <div class="fields">
+        <label>Department<select name="department" required>
+          <option value="objects">Objects &amp; Curiosities</option>
+          <option value="home">Home &amp; Living</option>
+          <option value="essentials">Everyday Essentials</option>
+          <option value="vintage">Vintage &amp; Found</option>
+        </select></label>
+        <label>Condition<select name="condition"><option>New</option><option>Vintage</option></select></label>
+        <label>Price (USD)<input name="price" type="number" min="0.01" max="1000000" step="0.01" required></label>
+        <label>Sale price (USD)<input name="salePrice" type="number" min="0.01" max="999999.99" step="0.01" placeholder="Optional"></label>
+        <label>Quantity<input name="stock" type="number" min="0" max="9999" step="1" value="1" required></label>
+      </div>
+      <fieldset>
+        <legend>Product specifications (optional)</legend>
+        <div class="fields">
+          <label>Materials or ingredients<input name="materials" maxlength="200"></label>
+          <label>Maker or brand<input name="maker" maxlength="120"></label>
+          <label>Origin<input name="origin" maxlength="120"></label>
+          <label>Item dimensions<input name="dimensions" maxlength="120" placeholder="Include units"></label>
+        </div>
+        <label>Condition notes<textarea name="conditionNotes" maxlength="500" placeholder="Wear, flaws, or repairs a shopper should know about"></textarea></label>
+      </fieldset>
+      <fieldset aria-describedby="shipping-help">
+        <legend>Shipping estimate (optional)</legend>
+        <p id="shipping-help">Include the box and padding in the weight. Measure the outside of the box.</p>
+        <div class="fields">
+          <label>Packed weight (oz)<input name="weightOz" type="number" min="0.01" step="any" inputmode="decimal"></label>
+          <label>Length (in)<input name="lengthIn" type="number" min="0.01" step="any" inputmode="decimal"></label>
+          <label>Width (in)<input name="widthIn" type="number" min="0.01" step="any" inputmode="decimal"></label>
+          <label>Height (in)<input name="heightIn" type="number" min="0.01" step="any" inputmode="decimal"></label>
+        </div>
+      </fieldset>
+      <label>Photos<input name="photos" type="file" accept="image/jpeg,image/png,image/webp" multiple aria-describedby="photo-help"></label>
+      <p id="photo-help">Up to four JPG, PNG, or WebP photos, 2 MB each. The first photo is the cover. When editing, selecting new photos replaces the existing set.</p>
+      <div class="actions">
+        <button type="submit" value="draft">Save Draft</button>
+        <button type="submit" value="published">Publish</button>
+        <button type="submit" value="edit" hidden>Save Changes</button>
+        <button type="button" id="cancel-edit" hidden>Cancel</button>
+      </div>
+    </form>
+    <p id="message" role="status" aria-live="polite"></p>
+  </section>
+  <section><h2>Your Products</h2><ul id="products" aria-label="Products added here"></ul></section>
+</main>
+</body>
+</html>

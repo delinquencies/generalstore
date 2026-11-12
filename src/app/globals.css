@@ -1,0 +1,56 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :focus-visible {
+    outline: 2px solid #1D4ED8;
+    outline-offset: 3px;
+  }
+
+  section[id] {
+    scroll-margin-top: 9rem;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .animate-marquee,
+  .animate-ping {
+    animation: none !important;
+  }
+}
+
+::selection {
+      background-color: #FFDF00;
+      color: #1E1A17;
+    }
+    .sticker-rotate-1 { transform: rotate(-2.5deg); }
+    .sticker-rotate-2 { transform: rotate(3deg); }
+    .sticker-rotate-3 { transform: rotate(-4deg); }
+    .tape-badge {
+      box-shadow: 2px 3px 0px #1E1A17;
+    }
+    .retro-border {
+      border: 2px solid #1E1A17;
+    }
+    .hard-shadow {
+      box-shadow: 4px 4px 0px #1E1A17;
+    }
+    .hard-shadow-lg {
+      box-shadow: 7px 7px 0px #1E1A17;
+    }
+    .hard-shadow-sm {
+      box-shadow: 2.5px 2.5px 0px #1E1A17;
+    }
+    @keyframes marquee {
+      0% { transform: translateX(0%); }
+      100% { transform: translateX(-50%); }
+    }
+    .animate-marquee {
+      display: flex;
+      width: 200%;
+      animation: marquee 24s linear infinite;
+    }
+    .animate-marquee:hover {
+      animation-play-state: paused;
+    }
