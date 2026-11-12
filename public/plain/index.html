@@ -637,6 +637,8 @@ body, .font-sans, .font-mono-display {
   background: #fffdf9;
 }
 
+.store-footer-band { background: #ffdf00; }
+
 .store-footer-grid,
 .store-footer-bottom {
   max-width: 78rem;
@@ -645,11 +647,10 @@ body, .font-sans, .font-mono-display {
 
 .store-footer-grid {
   display: grid;
-  grid-template-columns: minmax(0, 1fr) minmax(0, 0.95fr);
+  grid-template-columns: minmax(0, 0.75fr) minmax(0, 1.25fr);
   gap: clamp(0.5rem, 2vw, 1.25rem);
   align-items: center;
   padding: clamp(0.65rem, 2vw, 1.25rem);
-  background: #ffdf00;
 }
 
 .store-footer-brand a {
@@ -680,7 +681,7 @@ body, .font-sans, .font-mono-display {
 
 #footer-platforms {
   width: 100%;
-  max-width: 11rem;
+  max-width: 22rem;
   justify-self: end;
 }
 
@@ -693,24 +694,30 @@ body, .font-sans, .font-mono-display {
   display: flex;
   flex-wrap: wrap;
   justify-content: space-between;
-  gap: 0.55rem 1.25rem;
+  align-items: baseline;
+  gap: 0.2rem 0.85rem;
   border-top: 3px solid #1e1a17;
-  padding: 0.8rem clamp(0.85rem, 3vw, 2.25rem);
+  padding: 0.4rem clamp(0.75rem, 2vw, 1.25rem);
   font: 700 0.75rem/1.4 "Rubik", sans-serif;
 }
 
 .store-footer-bottom ul {
   display: flex;
   flex-wrap: wrap;
-  gap: 0.45rem 1rem;
+  gap: 0.2rem 0.65rem;
 }
 
 @media (min-width: 48rem) {
   .store-footer-grid {
-    grid-template-columns: minmax(0, 1fr) minmax(0, 11rem);
+    grid-template-columns: minmax(0, 1fr) minmax(0, 22rem);
   }
 }
 
+@media (min-width: 62rem) {
+  .store-footer-grid { grid-template-columns: minmax(0, 1fr) minmax(0, 42rem); }
+  #footer-platforms { max-width: 42rem; }
+  .store-footer #footer-platforms .about-platforms { grid-template-columns: repeat(8, minmax(0, 1fr)); }
+}
 
 
 /* Poster styling below the hero and on the shopping pages. */
@@ -857,17 +864,20 @@ body, .font-sans, .font-mono-display {
 }
 
 .page-poster-art {
-  display: grid;
-  grid-template: minmax(0, 1fr) / minmax(0, 1fr);
-  place-items: center;
+  position: relative;
   min-width: 0;
-  height: clamp(5.5rem, 19vw, 10rem);
-  padding: 0.3rem;
+  min-height: clamp(5.5rem, 19vw, 10rem);
   border-left: 3px solid #1e1a17;
   background: #fffdf9;
 }
+.page-poster-art[data-department="objects"] { background: #194bd3; }
+.page-poster-art[data-department="home"] { background: #fef4e0; }
+.page-poster-art[data-department="essentials"] { background: #fed801; }
+.page-poster-art[data-department="vintage"] { background: #e3422d; }
 
 .page-poster-art img {
+  position: absolute;
+  inset: 0;
   width: 100%;
   height: 100%;
   min-height: 0;
@@ -965,7 +975,7 @@ body, .font-sans, .font-mono-display {
   max-height: min(52svh, 27rem);
   object-fit: contain;
 }
-.preview-notice { flex-basis: 100%; font-weight: 400; }
+.preview-notice { font-weight: 400; }
 [data-local-preview] .preview-notice,
 [data-local-preview] .static-signup-note,
 html:not([data-local-preview]) .local-signup-note { display: none; }
@@ -1164,7 +1174,7 @@ body:has(.page-poster[data-page="about"]) .store-footer {
   border-top: 1px solid #1e1a1740;
   background: transparent;
 }
-body:has(.page-poster[data-page="about"]) .store-footer-grid { display: none; }
+body:has(.page-poster[data-page="about"]) .store-footer-band { display: none; }
 body:has(.page-poster[data-page="about"]) .store-footer-bottom {
   justify-content: center;
   border-top: 0;
@@ -1211,11 +1221,26 @@ body:has(.page-poster[data-page="about"]) .store-footer-bottom ul { justify-cont
   background-position: var(--tile-x) var(--tile-y);
 }
 .store-footer .about-platforms {
-  max-width: 11rem;
+  max-width: none;
   margin: 0;
-  gap: 0.25rem;
-  padding: 0.3rem;
   box-shadow: none;
+}
+@media (prefers-reduced-motion: no-preference) {
+  .store-footer .about-platform-icon {
+    animation: footer-icon-lift 10s ease-in-out infinite;
+    animation-delay: calc(var(--lift-index, 0) * 1.25s);
+  }
+  .store-footer .about-platforms li:nth-child(2) { --lift-index: 1; }
+  .store-footer .about-platforms li:nth-child(3) { --lift-index: 2; }
+  .store-footer .about-platforms li:nth-child(4) { --lift-index: 3; }
+  .store-footer .about-platforms li:nth-child(5) { --lift-index: 4; }
+  .store-footer .about-platforms li:nth-child(6) { --lift-index: 5; }
+  .store-footer .about-platforms li:nth-child(7) { --lift-index: 6; }
+  .store-footer .about-platforms li:nth-child(8) { --lift-index: 7; }
+}
+@keyframes footer-icon-lift {
+  0%, 10%, 100% { translate: 0 0; }
+  5% { translate: 0 -4px; }
 }
 @media (hover: hover) and (prefers-reduced-motion: no-preference) {
   .about-platform-icon { transition: transform 140ms ease-out, box-shadow 140ms ease-out; }
@@ -1497,12 +1522,12 @@ body:has(.page-poster[data-page="about"]) .store-footer-bottom ul { justify-cont
           <h2 id="next-find-title">The Next Find</h2>
           <p class="local-signup-note">Sign up and we’ll email you when we score a deal and can pass the savings on to you.</p>
           <p class="static-signup-note">Email signups will open when the store launches.</p>
-          <form id="next-find-signup" hidden>
+          <form id="next-find-signup">
             <label class="sr-only" for="next-find-email">Email address</label>
-            <div class="next-find-fields">
+            <fieldset class="next-find-fields" disabled>
               <input id="next-find-email" name="email" type="email" autocomplete="email" maxlength="254" placeholder="Email address" required>
               <button type="submit" class="store-header-button">Sign up</button>
-            </div>
+            </fieldset>
             <p role="status"></p>
           </form>
         </div>
@@ -1590,6 +1615,7 @@ body:has(.page-poster[data-page="about"]) .store-footer-bottom ul { justify-cont
   </div>
 </dialog>
     <footer class="store-footer">
+  <div class="store-footer-band">
   <div class="store-footer-grid">
     <div class="store-footer-brand">
       <a href="./index.html" aria-label="Oddly Enough home"><strong>Oddly</strong><span>Enough</span></a>
@@ -1597,9 +1623,10 @@ body:has(.page-poster[data-page="about"]) .store-footer-bottom ul { justify-cont
     </div>
     <div id="footer-platforms"></div>
   </div>
+  </div>
   <div class="store-footer-bottom">
     <p>&copy; Oddly Enough</p>
-  <p class="preview-notice">Storefront preview. Products shown are samples, and orders are unavailable.</p>
+    <p class="preview-notice">Sample inventory · Orders unavailable</p>
     <ul aria-label="Store information and policies">
       <li><a href="./index.html?view=about">About Us</a></li>
       <li><a href="./index.html?view=contact">Contact</a></li>
