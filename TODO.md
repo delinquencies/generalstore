@@ -28,6 +28,7 @@
 
 - [ ] Place and fulfill an end-to-end test order on the hosted store, including payment, stock update, receipt, shipping, and refund.
 - [ ] Check keyboard and mobile navigation, image loading, product-page metadata, and broken links.
+- [ ] Fix oversized photos on product detail pages. Cap the main photo height so it doesn’t dominate the page, preserve the full image, and check the layout on mobile and desktop.
 - [ ] Connect the production domain, verify HTTPS, and enable indexing when the real catalog and checkout are ready.
 
 Local setup and preview limitations are in [README.md](README.md).
